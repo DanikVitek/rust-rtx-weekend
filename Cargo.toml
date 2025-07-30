@@ -1,0 +1,6 @@
+[package]
+name = "rtx_weekend"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
