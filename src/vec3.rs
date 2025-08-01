@@ -135,7 +135,7 @@ impl Vec3 {
         }
 
         let r_out_perp = norm.mul_scalar_add(cos_theta, self) * refraction_idx;
-        let r_out_parallel = (norm * (r_out_perp.length_squared() - 1.0)).abs().sqrt();
+        let r_out_parallel = norm * -(1.0 - r_out_perp.length_squared()).abs().sqrt();
         return r_out_perp.add(r_out_parallel);
     }
 
@@ -147,7 +147,7 @@ impl Vec3 {
 fn reflectance(cos_theta: f64, refraction_idx: f64) -> f64 {
     let r0 = (1.0 - refraction_idx) / (1.0 + refraction_idx);
     let r02 = r0 * r0;
-    return r02 + (1.0 - r02) * (1.0 - cos_theta).powi(5);
+    r02 + (1.0 - r02) * (1.0 - cos_theta).powi(5)
 }
 
 impl Neg for Vec3 {

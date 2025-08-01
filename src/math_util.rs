@@ -18,7 +18,7 @@ pub const fn approx_eq_abs(x: f64, y: f64, tolerance: f64) -> bool {
 }
 
 thread_local! {
-    static RNG: Rc<UnsafeCell<SmallRng>> = Rc::new(UnsafeCell::new(SmallRng::seed_from_u64(42)))
+    static RNG: Rc<UnsafeCell<SmallRng>> = Rc::new(UnsafeCell::new(SmallRng::seed_from_u64(0)))
 }
 
 pub struct SmallThreadRng {
