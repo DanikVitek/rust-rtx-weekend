@@ -3,4 +3,4 @@
 Work done, by following [this](https://raytracing.github.io/books/RayTracingInOneWeekend.html) book.
 
 Resulting image:
-<img width="1920" height="1080" alt="img" src="https://github.com/user-attachments/assets/c1377751-cfb7-489d-9dde-1b83f17f96de" />
+<img width="1920" height="1080" alt="img" src="https://github.com/user-attachments/assets/5760f2c9-ed38-4a99-ac05-ec2f7697f563" />
