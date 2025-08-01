@@ -1,19 +1,10 @@
 use std::{
-    cell::UnsafeCell,
-    fs::File,
     io::{self, Write},
     mem::MaybeUninit,
-    ops::Neg,
     path::Path,
-    rc::Rc,
-    simd::{cmp::SimdPartialOrd, num::SimdInt},
 };
 
-use indicatif::{
-    MultiProgress, ParallelProgressIterator, ProgressBar, ProgressDrawTarget, ProgressIterator,
-    ProgressStyle,
-};
-use itertools::Itertools;
+use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use rand::Rng;
 use rayon::prelude::*;
 
@@ -26,21 +17,10 @@ pub struct Camera {
     img_size: Vec2<u32>,
     samples_per_pixel: u16,
     max_recursion: usize,
-    v_fov: f64,
     look_from: Vec3,
-    look_at: Vec3,
-    up: Vec3,
     defocus_angle: f64,
-    focus_dist: f64,
-    viewport_size: Vec2,
-    u: Vec3,
-    v: Vec3,
-    w: Vec3,
-    defocus_radius: f64,
     defocus_disk_u: Vec3,
     defocus_disk_v: Vec3,
-    viewport_u: Vec3,
-    viewport_v: Vec3,
     pixel_delta_u: Vec3,
     pixel_delta_v: Vec3,
     pixel_00_loc: Vec3,
@@ -131,7 +111,6 @@ impl Camera {
             2.0 * h * focus_dist
         };
         let viewport_width = viewport_height * (img_size.x() as f64 / img_size.y() as f64);
-        let viewport_size = Vec2::new(viewport_width, viewport_height);
 
         let w = (look_from - look_at).normalized();
         let u = up.cross(w).normalized();
@@ -155,16 +134,8 @@ impl Camera {
 
         Self {
             look_from,
-            look_at,
-            up,
-            v_fov,
             aspect_ratio,
             img_size,
-            viewport_size,
-            w,
-            u,
-            v,
-            defocus_radius,
             defocus_disk_u,
             defocus_disk_v,
             pixel_delta_u,
@@ -173,9 +144,6 @@ impl Camera {
             samples_per_pixel,
             max_recursion,
             defocus_angle,
-            focus_dist,
-            viewport_u,
-            viewport_v,
         }
     }
 
